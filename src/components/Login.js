@@ -1,4 +1,5 @@
 import '../App.css';
+import axios from 'axios';
 
 function Login() {
   function Handle(event)
@@ -8,6 +9,12 @@ function Login() {
     const un = data.get("t1");
     const pw = data.get("pw");
     console.log(un+" --- "+pw);
+    axios.get('http://localhost:8081/check',{params: {
+      un: un,
+      pw: pw
+    }}).then((response) => {
+      console.log(response.data);
+    })
 
   }
   return (

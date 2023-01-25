@@ -55,7 +55,7 @@ function Home() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Aman
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

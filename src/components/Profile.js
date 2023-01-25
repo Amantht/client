@@ -9,9 +9,9 @@ function App() {
 <h6>Vaddeswaram,Andhrapradesh-522502</h6>
 <hr color="black"/>
 <img src={aman} align="center" style={{width:"120px",height:"120px"}} alt="hi"/>
-<h5>S.Srithar</h5>
-<h5>6684</h5>
-<h5>Associate Professor</h5>
+<h5>Aman Chaudhary Tharu</h5>
+<h5>210032572</h5>
+<h5>Student</h5>
 </div>    
 );
 }
