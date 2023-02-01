@@ -22,7 +22,7 @@ function Login() {
       setResult(response.data);
     })
   }
-  if (result== null || result=="fail"){
+  if (result===null || result==="fail"){
   return (
     <div>
     <div className='App-body'>
