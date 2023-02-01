@@ -1,11 +1,16 @@
 import '../App.css';
 import axios from 'axios';
+import Page1 from './Page1';
+import { useState } from 'react';
 
 function Login() {
+  const[result, setResult] =useState(null);
+  const[un, setUn]=useState(null);
   function Handle(event)
   {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setUn(data.get("t1"));
     const un = data.get("t1");
     const pw = data.get("pw");
     console.log(un+" --- "+pw);
@@ -14,9 +19,10 @@ function Login() {
       pw: pw
     }}).then((response) => {
       console.log(response.data);
+      setResult(response.data);
     })
-
   }
+  if (result== null || result=="fail"){
   return (
     <div>
     <div className='App-body'>
@@ -30,7 +36,15 @@ function Login() {
       </div>
     </div>
     </div>
+  
   );
+}else{
+  return(
+    <div>
+      <Page1/>
+    </div>
+  )
+}
 }
 
 export default Login;
