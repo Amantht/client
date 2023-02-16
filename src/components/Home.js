@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Login', 'Registration', 'Profile'];
+const pages = ['Login', 'Registration', 'Profile','Ex4','Ex5'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Home() {
@@ -123,7 +123,7 @@ function Home() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Aman
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (

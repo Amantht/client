@@ -6,11 +6,13 @@ import { useState } from 'react';
 function Login() {
   const[result, setResult] =useState(null);
   const[un, setUn]=useState(null);
+  const[pw, setPw]=useState(null);
   function Handle(event)
   {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setUn(data.get("t1"));
+    setPw(data.get("pw"));
     const un = data.get("t1");
     const pw = data.get("pw");
     console.log(un+" --- "+pw);
@@ -27,7 +29,7 @@ function Login() {
     <div>
     <div className='App-body'>
       <div class='App-login'>
-      <form onClick={Handle} style={{border:"2px solid blue",padding:"20px"}}>
+      <form onSubmit={Handle} style={{border:"2px solid blue",padding:"20px"}}>
       <center><h3 style={{border:"2px solid red"}}>Login Here</h3></center>
         Username:<input type="text" name="t1"/><br/>
         Password:<input type="password" name="pw"/><br/>
@@ -41,7 +43,7 @@ function Login() {
 }else{
   return(
     <div>
-      <Page1/>
+      <Page1 un={un} result={result} pw={pw}/>
     </div>
   )
 }
