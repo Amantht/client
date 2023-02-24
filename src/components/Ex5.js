@@ -20,6 +20,13 @@ function Ex5() {
             console.log(response.data);
         })
     }
+    function showOne(){
+        axios.get('http://localhost:8081/show_one_stu',{params:{
+
+        }}).then((response)=>{
+            console.log(response.data)
+        })
+    }
     return(
         <div>
             <form onSubmit={handleSubmit}>
@@ -34,7 +41,10 @@ function Ex5() {
                 <input type="submit" value="Save Student Data"/>
                 <br/>
             </form>
+          
+            <button onClick={()=>showOne()}> Display 1st Student</button>
         </div>
+        
     );
 
 }
