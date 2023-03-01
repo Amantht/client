@@ -1,53 +1,131 @@
-import { ResetTvOutlined } from '@mui/icons-material';
 import axios from 'axios';
 import { useState } from 'react';
 
-function Ex5() {
-    // const[result,setResult]=useState(null);
-    // const isDict =dict => {
-    //     return typeof dict== "object" && !Array.isArray
-
-
+function Ex5(){
+    const [result,setResult] = useState(null);
+    const isDict = dict => {
+        return typeof dict === "object" && !Array.isArray(dict);
+    };
+    
     function handleSubmit(event){
         event.preventDefault();
-        const data=new FormData(event.currentTarget);
-        axios.post('http://localhost:8081/insert_stu',{
-            stu_id: parseInt(data.get("stu_id")),
-            stu_name: data.get("stu_name"),
-            stu_dept: data.get("stu_dept"),
-            stu_address: data.get("stu_address")
-        }).then((response)=>{
+        const data = new FormData(event.currentTarget);
+        axios.post("http://localhost:8082/insert_stu", {
+            stu_id: parseInt(data.get('stu_id')),
+            stu_name: data.get('stu_name'),
+            stu_dept: data.get('stu_dept'),
+            stu_address: data.get('stu_address')
+          }).then((response) => {
             console.log(response.data);
-        })
+          })
+
     }
-    function showOne(){
-        axios.get('http://localhost:8081/show_one_stu',{params:{
+    function showOne(event){
+        axios.get("http://localhost:8082/show_one_stu",{params:{
 
         }}).then((response)=>{
             console.log(response.data)
+            setResult(response.data)
+            console.log("Successfully retrieved")
         })
+
     }
+
+    function showAll(event){
+        axios.get("http://localhost:8082/show_all",{params:{
+
+        }}).then((response)=>{
+            console.log(response.data)
+            setResult(response.data)
+        })
+
+    }
+    function showAllGt1(event){
+        axios.get("http://localhost:8082/show_all_gt1",{params:{
+
+        }}).then((response)=>{
+            console.log(response.data)
+            setResult(response.data)
+        })
+
+    }
+
+    if(result == null){
     return(
         <div>
+            <center>
             <form onSubmit={handleSubmit}>
-                Student Id:<input type="text" name="stu_id"/>
+                Student ID:<input type="text" name="stu_id" />
                 <br/>
-                Name:<input type="text" name="stu_name"/>
+                Name:<input type="text" name="stu_name" />
                 <br/>
-                Department:<input type="text" name="stu_dept"/>
+                Dept:<input type="text" name="stu_dept" />
                 <br/>
-                Address:<input type="text" name="stu_address"/>
-                <br/>
-                <input type="submit" value="Save Student Data"/>
-                <br/>
+                Address:<input type="text" name="stu_address" />
+                <br/><br/>
+                <input type="submit" value="Save Student Data" />
             </form>
-          
-            <button onClick={()=>showOne()}> Display 1st Student</button>
-        </div>
-        
-    );
+           
+            <br/>
+            <button onClick={()=>showOne()}>Display 1st student</button>
+            <br/>
+            <button onClick={()=>showAll()}>Display All student</button>
+            <br/>
+            <button onClick={()=>showAllGt1()}>Display student value</button>
+            </center>
 
-}
+        </div>
+    );
+    }
+    else{
+        if(isDict(result)){
+            return(
+                <div>
+                    <table border="1">
+                        <tr>
+                            <th> Student ID </th>
+                            <th> Student Name</th>
+                            <th> Student Department</th>
+                            <th> Student Address</th>
+                        </tr>
+                        <tr>
+                            <td> {result.stu_id} </td>
+                            <td> {result.stu_name} </td>
+                            <td> {result.stu_dept} </td>
+                            <td> {result.stu_address} </td>
+                        </tr>
+                    </table>
+                </div>
+            );
+        }
+            else{
+                return(
+                    <div>
+                        <table border="1">
+                            <tr>
+                                <th> Student ID </th>
+                                <th> Student Name</th>
+                                <th> Student Department</th>
+                                <th> Student Address</th>
+                            </tr>
+                            {result.map((obj)=>{
+                                return(
+                            <tr>
+                                <td> {obj.stu_id} </td>
+                                <td> {obj.stu_name} </td>
+                                <td> {obj.stu_dept} </td>
+                                <td> {obj.stu_address} </td>
+                            </tr>
+                                );
+                                })}
+                        
+                
+                </table>
+                </div>
+                );
+
+                            }
+                        }
+                    }
 
 export default Ex5;
-
